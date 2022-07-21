@@ -1,4 +1,4 @@
-# パラメータ
+# Simulator()の初期化パラメータ
 
 ROUND：行動の繰り返し数。
 
@@ -18,9 +18,11 @@ STRATEGY_SHIFT_MAX_RATE：「１エージェントが１時間区間で戦略を
 
 PENALTY_LINE：(r, a) でタプル形式で指定する。r = 「コミュニティ内で略奪行動をとったエージェント数」÷(「コミュニティ内で略奪行動をとったエージェント数」ー「コミュニティ内で協力行動をとったエージェント数」)　でrを定義したとき、r < PENALTY_LINE の集団では、略奪行動をとったエージェントがペナルティを受ける。ペナルティの大きさは、a*max(0, 「コミュニティ内で略奪行動をとったエージェント数」-「コミュニティ内で協力行動をとったエージェントの平均損得値」) となる。rの値の範囲は,\、0 <= r < 1　であり、aの値の範囲は0 < a (1 < a を推奨)である。デフォルト=(r=0,a=1)では、ペナルティは存在しない。
 
+INITIALIZE_RUN：シミュレーションを始める前に、コミュニティを形成するために、シミュレーションと同じ条件でエージェントを動かす回数。デフォルト＝1000
+
 #   メソッド
 
-simulator.run(r) : r回行動 rを省略すると1回行動する
+simulator.run(r) : r回の行動とその結果の記録をする。 rを省略すると1回行動する
 
 simulator.plot_current_point_histgrams(savefig_name) : 戦略ごとの、前回の行動時の損得値のヒストグラムを出力する。savefig_nameに画像ファイル名を指定すると、画像で保存される。指定しない場合、画像ファイルは出力されない
 
@@ -31,6 +33,8 @@ simulator.plot_transition_number_of_strategy(savefig_name) : 戦略ごとに、�
 simulator.traceplot_average_point_for_all_strategy(savefig_name) : 戦略ごとに、その戦略をとるエージェントの平均損得値の変化を出力する。savefig_nameに画像ファイル名を指定すると、画像で保存される。指定しない場合、画像ファイルは出力されない
 
 simulator.plot_2d_hist_for_strategy(savefig_name) : 戦略ごとに、その戦略をとるエージェントの平面空間上の分布(ヒートマップ)を出力する。savefig_nameに画像ファイル名を指定すると、画像で保存される。指定しない場合、画像ファイルは出力されない
+
+simulator.run_and_plot_template(ROUND) ： ROUND回行動し、その結果をテンプレ形式で出力する。
 
 # 各戦略
 
